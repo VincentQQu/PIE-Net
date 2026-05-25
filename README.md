@@ -2,7 +2,7 @@
 
 **Probabilistic Intensity-Event Modeling for High-Quality Event-Based Video Generation**
 
-[![PyPI version](https://img.shields.io/pypi/v/pie-net.svg)](https://pypi.org/project/pie-net/)
+[![PyPI version](https://img.shields.io/pypi/v/event-pienet.svg)](https://pypi.org/project/event-pienet/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 
@@ -34,7 +34,7 @@ Two pretrained variants are included:
 | | **PIE-Net** | **PIE-Net-Lite** |
 |---|-------------|------------------|
 | **Encoder depth** | 3 layers | 2 layers |
-| **Parameters** | 154K | 79K |
+| **Parameters** | **154K** | **79K** |
 | **FLOPs @ 240×180** | 1.59G | 1.58G |
 | **Best for** | Highest quality | Speed & edge deployment |
 
@@ -54,8 +54,8 @@ Metrics from the shipped checkpoints on standard benchmarks:
 
 | Dataset | MSE ↓ | SSIM ↑ | LPIPS ↓ |
 |---------|-------|--------|---------|
-| **IJRR (ECD)** | 0.0221 | 0.6197 | 0.2079 |
-| **MVSEC** | 0.0428 | 0.3889 | 0.4418 |
+| **IJRR (ECD)** | 0.0221 | **0.6197** | 0.2079 |
+| **MVSEC** | **0.0428** | **0.3889** | 0.4418 |
 | **HQF** | 0.0267 | 0.5993 | 0.2494 |
 
 > **PIE-Net** leads on perceptual quality (LPIPS) and HQF. **PIE-Net-Lite** wins on IJRR MSE/SSIM with half the parameters — ideal when latency matters.
@@ -67,26 +67,26 @@ Metrics from the shipped checkpoints on standard benchmarks:
 ### From PyPI (recommended)
 
 ```bash
-pip install pie-net
+pip install event-pienet
 ```
 
 ### With optional dependencies
 
 ```bash
 # Real-time event camera demo (DVS / DAVIS)
-pip install pie-net[realtime]
+pip install event-pienet[realtime]
 
 # Benchmark evaluation helpers
-pip install pie-net[eval]
+pip install event-pienet[eval]
 
 # Everything
-pip install pie-net[all]
+pip install event-pienet[all]
 ```
 
 ### From source
 
 ```bash
-git clone https://github.com/vincentquq/pie-net.git
+git clone https://github.com/VincentQQu/pie-net.git
 cd pie-net
 pip install -e .
 ```
@@ -97,7 +97,7 @@ Install PyTorch with CUDA support first if you have a GPU:
 
 ```bash
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
-pip install pie-net
+pip install event-pienet
 ```
 
 ---
@@ -193,7 +193,7 @@ We recommend [EVREAL](https://github.com/ercanburak/EVREAL) for standardized eva
 
 ```bash
 git clone https://github.com/ercanburak/EVREAL.git && cd EVREAL
-pip install pie-net
+pip install event-pienet
 cp /path/to/pie-net/config/method/PIENet.json config/method/
 cp /path/to/pie-net/config/method/PIENetLite.json config/method/
 cp /path/to/pie-net/pie_net/evreal_wrapper.py model/PIENet.py
