@@ -54,8 +54,8 @@ Metrics from the shipped checkpoints on standard benchmarks:
 
 | Dataset | MSE ↓ | SSIM ↑ | LPIPS ↓ |
 |---------|-------|--------|---------|
-| **IJRR (ECD)** | 0.0221 | **0.6197** | 0.2079 |
-| **MVSEC** | **0.0428** | **0.3889** | 0.4418 |
+| **IJRR (ECD)** | 0.0221 | 0.6197 | 0.2079 |
+| **MVSEC** | 0.0428 | 0.3889 | 0.4418 |
 | **HQF** | 0.0267 | 0.5993 | 0.2494 |
 
 > **PIE-Net** leads on perceptual quality (LPIPS) and HQF. **PIE-Net-Lite** wins on IJRR MSE/SSIM with half the parameters — ideal when latency matters.
