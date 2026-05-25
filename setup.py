@@ -9,13 +9,13 @@ readme_path = Path(__file__).parent / "README.md"
 long_description = readme_path.read_text(encoding="utf-8") if readme_path.exists() else ""
 
 setup(
-    name="pie-net",
+    name="event-pienet",
     version="1.1.0",
     author="Vincent Qu",
     description="PIE-Net: Probabilistic Intensity-Event Modeling for High Quality Event-Based Video Generation",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/vincentquq/pie-net",
+    url="https://github.com/VincentQQu/pie-net",
     packages=find_packages(),
     package_data={
         "pie_net": ["pretrained/*.pth"],

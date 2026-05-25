@@ -520,7 +520,7 @@ def load_model(
         if not os.path.exists(weight_path):
             raise FileNotFoundError(
                 f"Pretrained weights not found at {weight_path}. "
-                "Reinstall with: pip install pie-net"
+                "Reinstall with: pip install event-pienet"
             )
         state_dict = torch.load(weight_path, map_location=device)
         missing, _unexpected = model.load_state_dict(state_dict, strict=False)

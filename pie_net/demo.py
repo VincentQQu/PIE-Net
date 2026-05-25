@@ -20,7 +20,7 @@ def _require_dv():
     except ImportError as exc:
         raise SystemExit(
             "dv-processing is required for the real-time demo.\n"
-            "Install with: pip install pie-net[realtime]"
+            "Install with: pip install event-pienet[realtime]"
         ) from exc
 
 
