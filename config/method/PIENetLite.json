@@ -1,0 +1,10 @@
+{
+    "name": "PIENetLite",
+    "model_class": "PIENetLite",
+    "load_function": "load_model_lite",
+    "num_bins": 5,
+    "color": false,
+    "gpu": true,
+    "variant": "pie-net-lite",
+    "description": "PIE-Net-Lite: lightweight 2-layer variant (79K params)"
+}

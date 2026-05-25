@@ -1,0 +1,10 @@
+{
+    "name": "PIENet",
+    "model_class": "PIENet",
+    "load_function": "load_model",
+    "num_bins": 5,
+    "color": false,
+    "gpu": true,
+    "variant": "pie-net",
+    "description": "PIE-Net: Probabilistic Intensity-Event Modeling (full model, 154K params)"
+}
