@@ -10,7 +10,7 @@ long_description = readme_path.read_text(encoding="utf-8") if readme_path.exists
 
 setup(
     name="event-pienet",
-    version="1.1.0",
+    version="1.1.1",
     author="Vincent Qu",
     description="PIE-Net: Probabilistic Intensity-Event Modeling for High Quality Event-Based Video Generation",
     long_description=long_description,

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "event-pienet"
-version = "1.1.0"
+version = "1.1.1"
 description = "PIE-Net: Probabilistic Intensity-Event Modeling for High Quality Event-Based Video Generation"
 readme = "README.md"
 license = {text = "MIT"}
