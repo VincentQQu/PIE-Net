@@ -24,6 +24,7 @@ Turn asynchronous **event camera** streams into **high-quality grayscale video**
 | **Tiny footprint** | 154K params (full) / 79K params (lite) — orders of magnitude smaller than competitors |
 | **Plug & play** | Pretrained weights ship with the package — no manual download |
 | **Benchmark-ready** | EVREAL configs included for ECD, MVSEC, and HQF |
+| **PIEM representation export** | Full 5-channel learned representation for downstream tasks (following the idea of EvRepSL) |
 
 ---
 
@@ -108,7 +109,7 @@ pip install event-pienet
 
 ```python
 import torch
-from pie_net import load_model, load_model_lite
+from pie_net import load_model, load_model_lite, stack_piem_representation
 
 # PIE-Net (full model — default)
 model = load_model(pretrained=True, device="cuda")
@@ -122,11 +123,35 @@ events = torch.randn(1, 5, 180, 240).cuda()  # [B, bins, H, W]
 
 with torch.no_grad():
     output = model(events)
-    frame = output["image"]   # [1, 1, H, W] reconstructed intensity
-    uncertainty = output["var"]  # [1, 1, H, W] per-pixel variance
+
+    # Reconstruction (backward-compatible keys)
+    frame = output["image"]       # alias for mean_f1 — [1, 1, H, W]
+    uncertainty = output["var"]   # alias for var_f1  — [1, 1, H, W]
+
+    # Full PIEM latent maps (for representation / downstream tasks)
+    mean_z = output["mean_exp_z"]  # expected log-intensity change
+    var_z  = output["var_exp_z"]   # uncertainty of Z
+    k      = output["k"]             # PIEM scaling parameter
+    mean_f1 = output["mean_f1"]    # reconstructed intensity
+    var_f1  = output["var_f1"]     # frame uncertainty
+
+    # Stack into a 5-channel PIEM representation [1, 5, H, W]
+    piem_rep = stack_piem_representation(output)
 
 model.reset_states()  # call between sequences
 ```
+
+**Output keys** (since v1.1.2):
+
+| Key | Shape | Description |
+|-----|-------|-------------|
+| `mean_exp_z` | `[B, 1, H, W]` | Expected log-intensity change (Z mean) |
+| `var_exp_z` | `[B, 1, H, W]` | Uncertainty of Z |
+| `k` | `[B, 1, H, W]` | Learned PIEM scaling parameter |
+| `mean_f1` / `image` | `[B, 1, H, W]` | Reconstructed intensity frame |
+| `var_f1` / `var` | `[B, 1, H, W]` | Per-pixel frame uncertainty |
+
+Use `stack_piem_representation(output)` to combine the five PIEM maps into a single `[B, 5, H, W]` tensor — compatible with [EvRepSL](https://github.com/VincentQQu/EvRepSL) representation pipelines.
 
 ### Real-time demo (event camera)
 
@@ -267,12 +292,23 @@ PIE-Net is the next generation of E2HQV. If you use PIE-Net in your research, pl
   pages={4632--4640},
   year={2024}
 }
+
+@article{qu2024evrepsl,
+  title={EvRepSL: Event-Stream Representation via Self-Supervised Learning for Event-Based Vision},
+  author={Qu, Qiang and Chen, Xiaoming and Chung, Yuk Ying and Shen, Yiran},
+  journal={IEEE Transactions on Image Processing},
+  year={2024},
+  publisher={IEEE}
+}
 ```
+
+Paper: [IEEE TIP](https://ieeexplore.ieee.org/document/10758409) · [arXiv](https://arxiv.org/abs/2412.07080)
 
 ---
 
 ## Acknowledgments
 
+- [EvRepSL](https://github.com/VincentQQu/EvRepSL) — event representation toolkit (PIEM export)
 - [EVREAL](https://github.com/ercanburak/EVREAL) — evaluation framework
 - [dv-processing](https://gitlab.com/inivation/dv/dv-processing) — event camera I/O
 

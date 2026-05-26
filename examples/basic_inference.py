@@ -2,7 +2,7 @@
 """Minimal inference example for PIE-Net and PIE-Net-Lite."""
 
 import torch
-from pie_net import load_model, load_model_lite, count_parameters
+from pie_net import load_model, load_model_lite, count_parameters, stack_piem_representation
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -14,7 +14,9 @@ print(f"PIE-Net params: {count_parameters(model):,}")
 events = torch.randn(1, 5, 180, 240, device=device)
 with torch.no_grad():
     out = model(events)
-print("PIE-Net output:", out["image"].shape, out["var"].shape)
+print("PIE-Net reconstruction:", out["image"].shape, out["var"].shape)
+print("PIE-Net PIEM maps:", out["mean_exp_z"].shape, out["k"].shape)
+print("PIE-Net stacked PIEM:", stack_piem_representation(out).shape)
 
 model.reset_states()
 
@@ -26,3 +28,4 @@ print(f"PIE-Net-Lite params: {count_parameters(lite):,}")
 with torch.no_grad():
     out_lite = lite(events)
 print("PIE-Net-Lite output:", out_lite["image"].shape, out_lite["var"].shape)
+print("PIE-Net-Lite stacked PIEM:", stack_piem_representation(out_lite).shape)
