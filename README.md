@@ -6,7 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 
-Turn asynchronous **event camera** streams into **high-quality grayscale video** in real time — with **per-pixel uncertainty maps** and a principled probabilistic formulation grounded in event camera physics.
+Turn asynchronous **event camera** streams into **high-quality grayscale video** and **interpretable 5-channel learned representation** in real time — with **per-pixel uncertainty maps** and a principled probabilistic formulation grounded in event camera physics.
 
 <p align="center">
   <b>Two models. One pip install. Ready for research and deployment.</b>
